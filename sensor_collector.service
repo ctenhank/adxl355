@@ -1,0 +1,10 @@
+[Unit]
+Description=ADXL355 Accelerometers Data Collector
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/home/pi/adxl355/venv/bin/python3 /home/pi/adxl355/driver.py
+
+[Install]
+WantedBy=multi-user.target

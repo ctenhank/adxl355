@@ -34,7 +34,12 @@ def init_spi():
 
 def main():
     acc = init_spi()
-
+    # sensor reset
+    acc.write(adxl355.REG_RESET, 0x52)
+    time.sleep(0.5)
+    # change mode to measurement mode
+    acc.start()
+    time.sleep(0.5)
     # print information of this accelerometer
     acc.dumpinfo()
 
@@ -43,8 +48,11 @@ def main():
     outdir.mkdir(exist_ok=True, parents=True)
 
     # sampling rate
-    # rate(100) * seconds(30)
-    save_unit = 3000    
+    rate = 100
+    # time
+    seconds = 7200
+    
+    save_unit = rate * seconds    
 
     # The best method to capture in the exact time interval
     # actually, THIS IS NOT EXCAT, but the most exact method rather than 'sleep(1)'
@@ -65,6 +73,7 @@ def main():
         # collect data
         if received == signal.SIGALRM:
             data = acc.get3V()
+            # print(data)
             data.append(time.time())
             arrdata.append(data)
             cnt += 1
