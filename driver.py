@@ -50,7 +50,7 @@ def main():
     # sampling rate
     rate = 100
     # time
-    seconds = 7200
+    seconds = 5
     
     save_unit = rate * seconds    
 
@@ -77,7 +77,7 @@ def main():
             data.append(time.time())
             arrdata.append(data)
             cnt += 1
-            # if the number of data is 3000, save the data
+            # if the number of data is same as the save_unit, save the data
             if cnt == save_unit:
                 q.put(arrdata)
                 p = Process(name="dumper", target=dump_data, args=(q, outdir))

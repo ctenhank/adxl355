@@ -4,7 +4,9 @@ After=multi-user.target
 
 [Service]
 Type=idle
+WorkingDirectory=/home/pi/adxl355
 ExecStart=/home/pi/adxl355/venv/bin/python3 /home/pi/adxl355/driver.py
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
