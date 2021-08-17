@@ -50,7 +50,7 @@ def main():
     # sampling rate
     rate = 100
     # time
-    seconds = 5
+    seconds = 7200
     
     save_unit = rate * seconds    
 
