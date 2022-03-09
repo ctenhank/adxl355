@@ -118,29 +118,43 @@ class ADXL355():
         self.write(REG_POWER_CTL, tmp | 0b1)
         
     def dumpinfo(self):
-        print("ADXL355 SPI Info Dump")
-        print("========================================")
+        ret = ""
+        ret += "ADXL355 SPI Info Dump" + "\n"
+        ret += "========================================" + "\n"
+
+        #print("ADXL355 SPI Info Dump")
+        #print("========================================")
         idad = self.read(REG_DEVID_AD)
-        print("Analog Devices ID: 0x{:X}".format(idad))
+        ret += "Analog Devices ID: 0x{:X}\n".format(idad)
+        #print("Analog Devices ID: 0x{:X}".format(idad))
         memsid = self.read(REG_DEVID_MST)
-        print("Analog Devices MEMS ID: 0x{:X}".format(memsid))
+        ret += "Analog Devices MEMS ID: 0x{:X}\n".format(memsid)
+        #print("Analog Devices MEMS ID: 0x{:X}".format(memsid))
         devid = self.read(REG_PARTID)
-        print("Device ID: 0x{0:X} (octal: {0:o})".format(devid))
+        ret += "Device ID: 0x{0:X} (octal: {0:o})\n".format(devid)
+        #print("Device ID: 0x{0:X} (octal: {0:o})".format(devid))
 
         powerctl = self.read(REG_POWER_CTL)
-        print("Power Control Status: 0b{:08b}".format(powerctl))
+        ret += "Power Control Status: 0b{:08b}\n".format(powerctl)
+        #print("Power Control Status: 0b{:08b}".format(powerctl))
         if(powerctl & 0b1):
-            print("--> Standby")
+            ret += "--> Standby\n"
+            #print("--> Standby")
         else:
-            print("--> Measurement Mode")
+            ret += "--> Measurement Mode\n"
+            #print("--> Measurement Mode")
 
         rng = self.read(REG_RANGE)
         if rng & 0b11 == SET_RANGE_2G:
-            print("Operating in 2g range")
+            ret += "Operating in 2g range\n"
+            #print("Operating in 2g range")
         if rng & 0b11 == SET_RANGE_4G:
-            print("Operating in 4g range")
-        if rng & 0b11 == SET_RANGE_8G:
-            print("Operating in 8g range")
+            ret += "Operating in 4g range\n"
+            #print("Operating in 4g range")
+        if rng & 0b11 == SET_RANGE_8G:\
+            ret += "Operating in 8g range\n"
+            #print("Operating in 8g range")
+        return ret
               
     def whoami(self):
         t = self.read(REG_PARTID)
