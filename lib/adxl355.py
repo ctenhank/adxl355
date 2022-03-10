@@ -1,3 +1,4 @@
+# This code is in https://github.com/nuclearfutureslab/adxl355-pi/blob/master/adxl355.py
 import time
 # Register Address
 # Unit: 1 Byte
